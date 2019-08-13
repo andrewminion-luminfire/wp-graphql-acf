@@ -785,6 +785,19 @@ class Config {
 			return null;
 		}
 
+		/**
+		 * Filters the field configuration before merging into all field configurations.
+		 *
+		 * @param array  $field_config Field configuration.
+		 * @param string $field_name   Name of WPGraphQL field.
+		 * @param string $type_name    Name of WPGraphQL field type.
+		 * @param array  $acf_field    ACF Field object.
+		 * @param string $acf_type     Type of ACF field.
+		 *
+		 * @return array               Field configuration.
+		 */
+		$field_config = apply_filters( 'wpgraphql_acf_field_config', $field_config, $field_name, $type_name, $acf_field, $acf_type );
+
 		$config = array_merge( $config, $field_config );
 
 		return register_graphql_field( $type_name, $field_name, $config );
